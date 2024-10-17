@@ -1,0 +1,30 @@
+<p style="color: green"><%= notice %></p>
+
+<% if @post.image.present? %>
+  <div>
+    <%= image_tag @post.image, alt: @post.title,  width:"1080", height:"400" %>
+  </div>
+<% end %>
+
+<%= render @post %>
+
+
+
+<br>
+
+<%= render 'comments/form', post: @post %>
+
+
+<br>
+
+<%= render 'comments/post_comments' %>
+
+
+
+
+<div>
+  <%= link_to "Editar esta Noticia", edit_post_path(@post) %> |
+  <%= link_to "Volver a noticias", posts_path %>
+
+  <%= button_to "Borrar esta noticia", @post, method: :delete %>
+</div>

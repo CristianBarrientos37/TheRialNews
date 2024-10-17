@@ -1,0 +1,29 @@
+
+
+
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Noticias" %>
+
+<h1>Noticias</h1>
+
+<div id="posts">
+  <% @posts.each do |post| %>
+    <div class="post">
+      <% if post.image.present? %>
+        <div>
+          <%= image_tag post.image, alt: post.title %>
+        </div>
+      <% end %>
+      
+      <h2><%= link_to post.title, post %></h2>
+      <p><%= post.description %></p>
+      <small><%= post.created_at.strftime("%d de %B de %Y a las %H:%M") %></small>
+      <p>
+        <%= link_to "Detalles de la noticia", post %>
+      </p>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to "Nueva noticia", new_post_path %>

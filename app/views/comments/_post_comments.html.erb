@@ -1,0 +1,9 @@
+<div class="card" style="width: 18rem;">
+    <% @comments.each do |comment| %>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item"><p><strong><%= comment.user.name %>:</strong> <%= comment.content %> </p></li>
+            <li class="list-group-item"><small><%= comment.created_at.strftime("%d de %B de %Y a las %H:%M") %></small></li>
+        </ul>
+    <% end %>
+</div>
+

@@ -1,0 +1,20 @@
+<%= form_with(model: @comment, local: true, url: post_comments_path(@post)) do |f| %>
+  <% if @comment.errors.any? %>
+    <div id = 'error_explanation'>
+      <h2>Este comentario no se pudo crear por las siguientes razones</h2>
+      <ul>
+        <% @comment.errors.full_messages.each do |msg|%>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.hidden_field :post_id, value: @post.try(:id)%>
+  <div class = 'field'>
+    <%= f.label :content, as: "Contenido" %>
+    <%= f.text_field :content %>
+  </div>
+  <div class = 'actions'>
+    <%= f.submit %>
+  </div>
+<% end %>
