@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: %i[ show edit update destroy ]
+  before_action :set_comment, only: %i[create show edit update destroy ]
 
   before_action only: [:new, :create] do
-    authorize_request(["author", "admin"])
+    authorize_request(["normal_user","author", "admin"])
   end
 
   before_action only: [:edit, :update, :destroy] do
