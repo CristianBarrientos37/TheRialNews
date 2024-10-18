@@ -1,5 +1,13 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[ show edit update destroy ]
+
+  before_action only: [:new, :create] do
+    authorize_request(["author", "admin"])
+  end
+
+  before_action only: [:edit, :update, :destroy] do
+    authorize_request(["admin"])
+  end
   
   # GET /comments or /comments.json
   def index
@@ -17,6 +25,8 @@ class CommentsController < ApplicationController
 
   # GET /comments/1/edit
   def edit
+    @post = Post.find(params[:post_id])  # Obtén el post relacionado
+    @comment = Comment.find(params[:id])  # Obtén el comentario
   end
 
   # POST /comments or /comments.json
@@ -37,14 +47,13 @@ class CommentsController < ApplicationController
 
   # PATCH/PUT /comments/1 or /comments/1.json
   def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: "Comment was successfully updated." }
-        format.json { render :show, status: :ok, location: @comment }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
+    @post = Post.find(params[:post_id])  # Obtén el post relacionado
+    @comment = Comment.find(params[:id])
+  
+    if @comment.update(comment_params)
+      redirect_to post_path(@post), notice: 'Comentario actualizado con éxito.'
+    else
+      render :edit
     end
   end
 

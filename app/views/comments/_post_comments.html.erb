@@ -1,8 +1,15 @@
 <div class="card" style="width: 18rem;">
     <% @comments.each do |comment| %>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item"><p><strong><%= comment.user.name %>:</strong> <%= comment.content %> </p></li>
-            <li class="list-group-item"><small><%= comment.created_at.strftime("%d de %B de %Y a las %H:%M") %></small></li>
+            <li class="list-group-item">
+                <p><strong><%= comment.user.name %>:</strong> <%= comment.content %> </p>
+                <small><%= comment.created_at.strftime("%d de %B de %Y a las %H:%M") %></small>
+                
+                <% if current_user&.admin? %> <!-- Verifica si el usuario es admin -->
+                    <%= link_to "Borrar", post_comment_path(comment.post, comment), method: :delete, data: { confirm: "¿Estás seguro de que deseas borrar este comentario?" }, class: "btn btn-danger btn-sm" %>
+                    <%= link_to "Editar", edit_post_comment_path(comment.post, comment), class: "btn btn-warning btn-sm" %>
+                <% end %>
+            </li>
         </ul>
     <% end %>
 </div>

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
 
   resources :posts do
-    resources :comments
+    resources :comments, only: [:create, :edit, :update, :destroy]
   end
   get "home/index"
   devise_for :users, controllers: {
