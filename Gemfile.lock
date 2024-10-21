@@ -107,7 +107,7 @@ GEM
       warden (~> 1.2.3)
     drb (2.2.1)
     erubi (1.13.0)
-    faker (3.4.2)
+    faker (3.5.1)
       i18n (>= 1.8.11, < 2)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
@@ -301,7 +301,7 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.9)
-  faker (~> 3.4)
+  faker (~> 3.5)
   figaro (~> 1.2)
   importmap-rails
   jbuilder
